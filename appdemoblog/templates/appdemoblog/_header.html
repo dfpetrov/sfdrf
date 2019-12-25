@@ -1,0 +1,40 @@
+<header id="header" class="header">
+    <div class="container">
+        <div id="header-inner">
+
+            <!-- Mobile -->
+            <div class="mobile-right">
+                <div class="menu-mobile">
+                    <span class="item item-1"></span>
+                    <span class="item item-2"></span>
+                    <span class="item item-3"></span>
+                </div>
+            </div>
+            <!-- End Mobile -->
+
+            <!-- Main Menu -->
+            <div class="main-menu">
+                <!-- Close -->
+                <div class="close-menu">
+                    <i class="fa fa-times"></i>
+                </div>
+                <!-- End Close -->
+
+                <ul class="menu-list clearfix">
+                    <li class="active"><a href="{% url 'appdemoblog:post-list-alt' %}">Статьи</a></li>
+                    <li><a href="{% url 'appdemoblog:post-create' %}">Создать статью</a></li>
+                    <li><a href="{% url 'appdemoblog:author-list-alt' %}">Авторы</a></li>
+                    <li><a href="{% url 'appdemoblog:author-create' %}">Создать автора</a></li>
+                    <li><a href="{% url 'appdemoblog:category-list-alt' %}">Категории</a></li>
+                    <li><a href="{% url 'appdemoblog:category-create' %}">Создать категорию</a></li>
+                    <li><a href="{% url 'appdemoblog:post-list' %}">Статьи JSON (serialize)</a></li>
+                </ul>
+
+            </div>
+            <!-- End Main Menu -->
+            <div class="mobile-cover"></div>
+
+        </div>
+    </div>
+</header>
+<div class="header-offset"></div>

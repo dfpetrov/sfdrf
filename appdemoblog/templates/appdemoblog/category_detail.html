@@ -1,0 +1,69 @@
+{% extends 'appdemoblog/__base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+{% endblock %}
+
+{% block css_head %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/libs/font-awesome.min.css' %}">
+{% include 'appdemoblog/_bs4css.html' %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/styles.css' %}">
+{% endblock %}
+
+{% block title %}<title>Категория</title>{% endblock %}
+
+{% block content %}
+
+<div id="wrapper">
+    
+    {% include 'appdemoblog/_header.html' %}
+
+    <div class="container">
+
+        <div class="row py-4 text-center">
+            <div class="col">
+                <h1>Категория {{ category.title }}</h1>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+
+                <div class="posts">
+
+                    <!-- Author Post -->
+                    <div id="post-author">
+                        <div class="header-top clearfix">
+                            <div class="author-name">
+                                <span>Категория</span>
+                                <h2 class="title">
+                                    <a href="#">{{ category.title }}</a>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="author-description">
+                            {{ category.description }}
+                        </div>
+                    </div>
+                    <!-- End Author Post -->
+                
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% block js_body %}
+{% include 'appdemoblog/_jquery.html' %}
+<script src="{% static 'appdemoblog/js/scripts.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

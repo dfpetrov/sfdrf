@@ -1,0 +1,119 @@
+{% extends 'appdemoblog/__base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+{% endblock %}
+
+{% block css_head %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/libs/font-awesome.min.css' %}">
+{% include 'appdemoblog/_bs4css.html' %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/styles.css' %}">
+{% endblock %}
+
+{% block title %}<title>Категории</title>{% endblock %}
+
+{% block content %}
+
+<!-- <body> -->
+
+<!-- Wrapper Site -->
+<div id="wrapper">
+    
+    {% include 'appdemoblog/_header.html' %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="posts">
+
+                        {% for category in categories %}
+                        <!-- Author Post -->
+                        <div id="post-author">
+                            <div class="header-top clearfix">
+                                <div class="author-name">
+                                    <span>Категория</span>
+                                    <h2 class="title">
+                                        <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="author-description">
+                                {{ category.description }}
+                            </div>
+                            <div class="author-description">
+                                <p>Статьи в категории:</p>
+                                
+                                <ol>
+                                    {% for post in category.post_set.all %}
+                                    <li><a href="{{ post.get_absolute_url }}">{{post.title}}</a></li>
+                                    {% endfor %}
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- End Author Post -->
+                        {% endfor %}
+
+                    </div>
+
+                    {% if is_paginated %}
+                    <div class="post-share">
+                        <div class="kd-sharing-post-social">
+                            
+                            {% if page_obj.has_previous %}
+                                <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                            {% else %}
+                            
+                            {% endif %}
+
+                            {% for i in paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <a href="?page={{ i }}" title="страница {{ i }}" style="color: black; font-size: larger; background-color: rgb(192, 190, 229);">{{ i }}</a>
+                                {% else %}
+                                    <a href="?page={{ i }}" title="страница {{ i }}">{{ i }}</a>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                            {% else %}
+                                
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <a href="#" class="back-to-top" title="Back Top Top"><i class="fa fa-chevron-up"></i></a>
+        <div class="container">
+            <!-- Copyright -->
+            <div class="copyright">
+                <p>Designed and developed by <a href="#">by</a></p>
+            </div>
+            <!-- End Copyright -->
+        </div>
+    </footer>
+    <!-- End Footer -->
+</div>
+<!-- End Wrapper Site -->
+
+{% block js_body %}
+{% include 'appdemoblog/_jquery.html' %}
+<script src="{% static 'appdemoblog/js/scripts.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

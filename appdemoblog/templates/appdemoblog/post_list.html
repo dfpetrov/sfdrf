@@ -1,0 +1,139 @@
+{% extends 'appdemoblog/__base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+{% endblock %}
+
+{% block css_head %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/libs/font-awesome.min.css' %}">
+{% include 'appdemoblog/_bs4css.html' %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/styles.css' %}">
+{% endblock %}
+
+{% block title %}<title>Статьи</title>{% endblock %}
+
+{% block content %}
+
+<!-- <body> -->
+
+<!-- Wrapper Site -->
+<div id="wrapper">
+    
+    {% include 'appdemoblog/_header.html' %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="posts">
+
+                        {% for post in posts %}
+                        <!-- Article -->
+                        <article class="post">
+
+                            <div class="post-header">
+                                <!-- Title -->
+                                <h2 class="title">
+                                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                </h2>
+                                <!-- End Title -->
+                                <div class="post-details">
+                                    <div class="post-avatar">
+                                        <a href="{{ post.author.get_absolute_url }}">
+                                            <!-- <img src="images/avatar.png" alt="Rebecca"> -->
+                                            <img src="{{ post.author.avatar.url }}" alt="Rebecca">
+                                        </a>
+                                    </div>
+                                    <div class="post-author">by <a href="{{ post.author.get_absolute_url }}">{{ post.author }}</a></div>
+                                    <div class="post-date">{{ post.updated }}</div>
+                                    <div class="post-cat">in <a href="{{ post.category.get_absolute_url }}" rel="category tag">{{ post.category }}</a></div>
+                                </div>
+                            </div>
+
+                            <!-- Media -->
+                            <div class="post-media">
+                                <img src="{{ post.img.url }}" alt="Post">
+                            </div>
+                            <!-- End Media -->
+
+                            <div class="post-content">
+                                <!-- The Excerpt -->
+                                <div class="the-excerpt">
+                                    <p>{{ post.content }}</p>
+                                </div>
+                                <!-- End The Excerpt -->
+
+                                <!-- Read More -->
+                                <div class="read-more">
+                                    <a href="{{ post.get_absolute_url }}">Читать дальше...</a>
+                                </div>
+                                <!-- End Read More -->
+
+                            </div>
+                        </article>
+                        <!-- End Article -->
+                        {% endfor %}
+
+                    </div>
+
+                    {% if is_paginated %}
+                    <div class="post-share">
+                        <div class="kd-sharing-post-social">
+                            
+                            {% if page_obj.has_previous %}
+                                <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                            {% else %}
+                            
+                            {% endif %}
+
+                            {% for i in paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <a href="?page={{ i }}" title="страница {{ i }}" style="color: black; font-size: larger; background-color: rgb(192, 190, 229);">{{ i }}</a>
+                                {% else %}
+                                    <a href="?page={{ i }}" title="страница {{ i }}">{{ i }}</a>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                            {% else %}
+                                
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <a href="#" class="back-to-top" title="Back Top Top"><i class="fa fa-chevron-up"></i></a>
+        <div class="container">
+            <!-- Copyright -->
+            <div class="copyright">
+                <p>Designed and developed by <a href="#">by</a></p>
+            </div>
+            <!-- End Copyright -->
+        </div>
+    </footer>
+    <!-- End Footer -->
+</div>
+<!-- End Wrapper Site -->
+
+{% block js_body %}
+{% include 'appdemoblog/_jquery.html' %}
+<script src="{% static 'appdemoblog/js/scripts.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

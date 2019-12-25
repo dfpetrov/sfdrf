@@ -1,12 +1,13 @@
-from appdemoblog.models import Post, Category
+from appdemoblog.models import Post, Category, Author
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name']
+        model = Author
+        # fields = ['name', 'description', 'last_name']
+        fields = '__all__'
 
 
 
@@ -19,7 +20,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
 
     author = AuthorSerializer(required=False)
-    category = CategorySerializer(required=False, many=True, read_only=True)
+    category = CategorySerializer(required=False, read_only=True)
 
     class Meta:
         model = Post

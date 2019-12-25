@@ -1,0 +1,80 @@
+{% extends 'appdemoblog/__base.html' %}
+
+{% load static %}
+
+{% block meta %}
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+{% endblock %}
+
+{% block css_head %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/libs/font-awesome.min.css' %}">
+{% include 'appdemoblog/_bs4css.html' %}
+<link rel="stylesheet" href="{% static 'appdemoblog/css/styles.css' %}">
+{% endblock %}
+
+{% block title %}<title>Создать автора</title>{% endblock %}
+
+{% block content %}
+
+<div id="wrapper">
+    
+    {% include 'appdemoblog/_header.html' %}
+
+    <div class="container">
+
+        <div class="row py-4 text-center">
+
+            <div class="col">
+
+                <h1>Создание автора</h1>
+
+            </div>
+
+            <!-- <div class="row"> -->
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+
+                <form method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group border border-info rounded p-2">
+                        {{ form.avatar.label_tag }}
+                        {{ form.avatar }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                    </div>
+
+                    <input type="submit" value="Сохранить" class="btn btn-success btn-lg my-4">
+                    <div style="height: 200px;"></div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="container"> -->
+    </div>
+
+</div>
+
+
+{% block js_body %}
+{% include 'appdemoblog/_jquery.html' %}
+<script src="{% static 'appdemoblog/js/scripts.js' %}"></script>
+{% endblock %}
+
+{% endblock %}
+
