@@ -5,6 +5,7 @@ from .views import PostList, PostDetail, PostEdit, PostListAlt, PostDetailAlt, A
 app_name = 'appdemoblog'
 
 urlpatterns = [
+    path('postJSON', PostList.as_view(), name='post-json'),
     path('', PostListAlt.as_view(), name='post-list'),
     path('<int:pk>', PostDetail.as_view(), name='post-detail'),
     
