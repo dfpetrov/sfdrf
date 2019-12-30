@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
-from .views import PostList, PostDetail, PostEdit, PostListAlt, PostDetailAlt, AuthorEdit, AuthorDetailAlt, AuthorListAlt, CategoryEdit, CategoryListAlt, CategoryDetailAlt, category_detail
+from .views import PostList, PostDetail, PostEdit, PostListAlt, PostDetailAlt, AuthorEdit, AuthorDetailAlt, AuthorListAlt, CategoryEdit, CategoryListAlt, CategoryDetailAlt, category_detail, register
 
 app_name = 'appdemoblog'
 
@@ -21,4 +21,6 @@ urlpatterns = [
     path('categories', CategoryListAlt.as_view(), name='category-list-alt'),
     path('categories/<int:pk>/', category_detail, name='category-detail'),
     url(r'^categories/(?P<slug>[-\w]+)/$', CategoryDetailAlt.as_view(), name='category-detail-alt'),
+
+    path('su', register, name='su'),
 ]

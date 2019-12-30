@@ -9,6 +9,7 @@ from rest_framework import generics
 from .models import Post, Author, Category
 from .serializers import PostSerializer  
 from .forms import CreatePostForm, CreateAuthorForm, CreateCategoryForm
+from django.contrib.auth.models import User
 
 class PostList(generics.ListAPIView):  
     queryset = Post.objects.all()  
@@ -17,6 +18,23 @@ class PostList(generics.ListAPIView):
 class PostDetail(generics.RetrieveAPIView):  
     queryset = Post.objects.all()  
     serializer_class = PostSerializer
+
+from .forms import UserRegistrationForm
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            return reverse_lazy('appdemoblog:post-list-alt')
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'appdemoblog/su.html', {'user_form': user_form})                                 
 
 class PostEdit(CreateView):
     model = Post
