@@ -62,7 +62,7 @@ class CategoryListAlt(ListView):
     model = Category
     template_name = 'appdemoblog/category_list.html'
     context_object_name = 'categories'
-    paginate_by = 30
+    paginate_by = 20
 
 class CategoryDetailAlt(DetailView):
     model = Category
@@ -71,4 +71,11 @@ class CategoryDetailAlt(DetailView):
 
 def category_detail(request, pk):
     category = get_object_or_404(Category, pk=pk)
+
+    if request.method == "POST":
+        print('Создание категории:')
+        # for i in range(101, 1000):            
+        #     Category.objects.create(title=f"Фек-{i}", description='Lorem ipsum, dolor sit amet consectetur adipisicing elit')
+        Category.objects.all()
+
     return render(request, 'appdemoblog/category_detail.html', {'category': category})
