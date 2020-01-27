@@ -25,3 +25,11 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+class CategorySerializer2(serializers.ModelSerializer):
+    
+    posts = PostSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ['id', 'title', 'description', 'slug', 'posts']

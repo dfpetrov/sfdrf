@@ -7,7 +7,7 @@ from django import views
 from rest_framework import generics
 
 from .models import Post, Author, Category
-from .serializers import PostSerializer  
+from .serializers import PostSerializer, CategorySerializer, CategorySerializer2
 from .forms import CreatePostForm, CreateAuthorForm, CreateCategoryForm
 from django.contrib.auth.models import User
 
@@ -97,3 +97,11 @@ def category_detail(request, pk):
         Category.objects.all()
 
     return render(request, 'appdemoblog/category_detail.html', {'category': category})
+
+class CategoryListApi(generics.ListAPIView):  
+    queryset = Category.objects.all()  
+    serializer_class = CategorySerializer2
+
+class CategoryDetailApi(generics.RetrieveAPIView):  
+    queryset = Category.objects.all()  
+    serializer_class = CategorySerializer

@@ -53,7 +53,7 @@ class Post(models.Model):
     updated = models.DateTimeField(default=timezone.now)
     publication_date = models.DateTimeField(default=timezone.now)
     # category = models.ManyToManyField(Category, verbose_name='Категория')
-    category = models.ForeignKey(Category, null=True, default=None, on_delete=models.SET_NULL, verbose_name='Категория')
+    category = models.ForeignKey(Category, null=True, default=None, on_delete=models.SET_NULL, verbose_name='Категория', related_name='posts')
     author = models.ForeignKey(Author, null=True, default=None, on_delete=models.SET_NULL, verbose_name='Автор')
     img = models.ImageField(upload_to='appdemoblog/images/posts/', verbose_name='Основное изображение')
 
